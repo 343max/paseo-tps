@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+
+# Raw recorded turns from the measurement spike: local timing data from real sessions.
+# Not published. tests/fixtures/runs.ts is the derived, committed form the tests use;
+# regenerate it with `node .spike/make-fixtures.mjs` if these are recorded again.
+.spike/runs/
