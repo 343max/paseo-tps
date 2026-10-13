@@ -6,6 +6,38 @@ Shows how fast the model is generating, in tokens per second, as a composer pill
 Subagents. Pressing the pill opens the details: current value, turn average, thinking and answer rates,
 how long the model has actually been generating, and the chars-per-token factors the estimate is using.
 
+## Install
+
+```bash
+paseo plugin install github:343max/paseo-tps
+```
+
+Then confirm it loaded:
+
+```bash
+paseo plugin ls
+```
+
+You want `paseo-tps  running  yes`. The pill appears in the composer of the agent you are viewing, and
+there is nothing to configure.
+
+- Plugins must be enabled on the target daemon first: **Settings → Plugins**, or `"pluginsEnabled": true` in
+  the daemon's `config.json`. `paseo daemon status --json` prints the daemon home if you need to find it.
+- Pin a revision with `--ref`: `paseo plugin install github:343max/paseo-tps --ref v1.0.0`.
+- Manage it afterwards with `paseo plugin update paseo-tps`, `paseo plugin reload paseo-tps`, or
+  `paseo plugin disable paseo-tps`.
+- `install` takes several source forms: `github:owner/repo` for GitHub, `git:<url>` for any other host, a
+  local directory path, `npm:<package>`, or a bare `owner/slug`. Two traps worth knowing:
+  - a bare `owner/slug` means the **Paseo registry**, not GitHub, and this plugin is not listed there;
+  - `gh:owner/repo` is not a shorthand. It is not rejected either: it falls through to the npm path and
+    fails trying to install a package literally named `gh:owner/repo`.
+
+  Use `github:343max/paseo-tps`.
+
+Paseo warns before installing because plugins run trusted code. This one is client-only: it contributes UI
+to the app, runs no code on the daemon, writes no files and makes no network requests, so a Git install needs
+no build step or dependency installation.
+
 ## What the number means
 
 **Speed is measured per generation second, not per second of wall clock.** A pi turn that runs a shell
